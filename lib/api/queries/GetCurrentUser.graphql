@@ -1,0 +1,20 @@
+query GetCurrentUser {
+  me {
+    username
+    socialMediaLinks {
+      facebook
+      github
+      instagram
+      linkedin
+      stackoverflow
+      twitter
+      website
+      youtube
+    }
+    profilePicture
+    name
+    location
+    id
+    dateJoined
+  }
+}

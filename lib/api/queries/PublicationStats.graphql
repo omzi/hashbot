@@ -1,0 +1,10 @@
+query PublicationStats($host: String!) {
+  publication(host: $host) {
+    drafts(first: 0) {
+      totalDocuments
+    }
+    posts(first: 0) {
+      totalDocuments
+    }
+  }
+}

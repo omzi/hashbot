@@ -1,0 +1,20 @@
+#graphql.config.yml
+overwrite: true
+schema: "https://gql.hashnode.com"
+documents: "graphql/**/*.graphql" # documents - where our graphql queries will reside
+generates:
+  graphql/types.tsx: #generate/types.tsx for typesafety during development
+    plugins:
+      - "typescript"
+  graphql/:
+    #useful so that it doesn't generate 1 big file but separate them per .graphql file
+    preset: near-operation-file
+    presetConfig:
+      extension: .gql.tsx
+      baseTypesPath: types.ts
+    # generates react hooks for urql
+    plugins:
+      - "typescript-operations"
+      - "typescript-urql"
+    config:
+      withHooks: true

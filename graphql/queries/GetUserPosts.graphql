@@ -1,0 +1,30 @@
+query GetUserPosts($host: String!, $nextCursor: String!) {
+  publication(host: $host) {
+    posts(first: 6, after: $nextCursor) {
+      totalDocuments
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          bookmarked
+          coverImage {
+            url
+          }
+          id
+          reactionCount
+          responseCount
+          title
+          url
+          views
+          tags {
+            name
+            slug
+          }
+          publishedAt
+        }
+      }
+    }
+  }
+}

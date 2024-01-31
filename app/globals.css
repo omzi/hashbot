@@ -1,0 +1,463 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+html,
+body,
+:root {
+  height: 100%;
+}
+
+.font-satoshi {
+  font-family: 'Satoshi', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.font-clash-display-bold {
+  font-family: 'Clash Display Bold', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.slide-in {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #0f0f0f;
+  transform-origin: bottom;
+}
+
+.slide-out {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #0f0f0f;
+  transform-origin: top;
+}
+
+.hero-highlighted {
+  @apply animate-text bg-gradient-to-r from-20% bg-clip-text text-transparent from-teal-500 via-purple-500 to-orange-500 inline-table;
+}
+
+/* .hero-highlighted {
+  @apply animate-text bg-gradient-to-r from-20% bg-clip-text text-transparent from-core via-emerald-500 to-core-secondary inline-table;
+} */
+
+.form-button {
+  @apply flex justify-center w-full px-3 py-2 text-sm font-medium text-white rounded-md shadow-sm bg-core hover:bg-blue-700 disabled:bg-blue-500 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600;
+}
+
+/* Account Profile  */
+.account-form-image-label {
+  @apply flex h-16 w-16 items-center justify-center rounded-full bg-light-2 dark:bg-dark-4 !important;
+}
+
+.account-form-image-input {
+  @apply cursor-pointer border-none bg-transparent outline-none file:text-core !important;
+}
+
+.account-form-input {
+  @apply border h-12 placeholder:text-gray-400 border-light-2 dark:border-dark-4 bg-light-1 dark:bg-dark-3 text-dark-1 dark:text-light-1 ring-1 ring-gray-200 dark:ring-gray-700 focus-visible:ring-offset-0 focus-visible:ring-2 focus-visible:ring-core transition-colors duration-300 !important;
+}
+
+.account-form-textarea {
+  @apply border max-h-32 resize-none placeholder:text-gray-400 border-light-2 dark:border-dark-4 bg-light-1 dark:bg-dark-3 text-dark-1 dark:text-light-1 ring-1 ring-gray-200 dark:ring-gray-700 focus-visible:ring-offset-0 focus-visible:ring-2 focus-visible:ring-core transition-colors duration-300 !important;
+}
+
+/* Overlay styles */
+.fade-enter,
+.fade-exit {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.fade-enter-active,
+.fade-exit-active {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shadow-ab {
+  --tw-shadow: 0 2px 5px 1px rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 2px 5px 1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.tooltip-content {
+	@apply bg-[#e5e5e5] dark:bg-black text-black dark:text-white;
+
+	border-radius: 4px;
+	padding: 8px 14px;
+	font-size: 14px;
+	line-height: 1;
+	box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+	user-select: none;
+	overflow: visible;
+	animation-duration: 300ms;
+	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: transform, opacity;
+}
+
+.tooltip-content[data-state='delayed-open'][data-side='top'] {
+	animation-name: slideDownAndFade;
+}
+
+.tooltip-content[data-state='delayed-open'][data-side='right'] {
+	animation-name: slideLeftAndFade;
+}
+
+.tooltip-content[data-state='delayed-open'][data-side='bottom'] {
+	animation-name: slideUpAndFade;
+}
+
+.tooltip-content[data-state='delayed-open'][data-side='left'] {
+	animation-name: slideRightAndFade;
+}
+
+.tooltip-arrow {
+	@apply fill-white dark:fill-black;
+}
+
+@keyframes slideUpAndFade {
+	from {
+		opacity: 0;
+		transform: translateY(2px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideRightAndFade {
+	from {
+		opacity: 0;
+		transform: translateX(-2px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes slideDownAndFade {
+	from {
+		opacity: 0;
+		transform: translateY(-2px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideLeftAndFade {
+	from {
+		opacity: 0;
+		transform: translateX(2px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.chat {
+	@apply relative;
+}
+
+.chat::after {
+	@apply absolute block w-0 content-[''];
+	border: 6px solid transparent;
+}
+
+.chat-left::after {
+	@apply -left-1.5 top-3 border-r-[6px] border-r-secondary border-l-0;
+	border-left-style: solid;
+}
+
+.chat-right::after {
+	@apply -right-1.5 top-3 border-l-[6px] border-l-blue-200 border-r-0;
+	border-right-style: solid;
+}
+
+/* TODO: Tidy up CSS below... */
+:root {
+	--black-rgb: 0, 0, 0;
+	--white-rgb: 255, 255, 255;
+	--ava-background-color: #ff11ff;
+	--ava-image-background: #ffa0ff;
+	--ava-text-color: #fff;
+	/* --idara-background-color: #ad0afd;
+	--idara-image-background: #cf8cef; */
+	--kai-background-color: #6528f7;
+	--kai-image-background: #a884fd;
+	--kai-text-color: #fff;
+	--idara-background-color: #00DFA2;
+	--idara-image-background: #80ffdc;
+	--idara-text-color: #000;
+	--ethan-background-color: #f7ec09;
+	--ethan-image-background: #f7f286;
+	--ethan-text-color: #000;
+}
+
+label.persona-card {
+	@apply select-none;
+	cursor: pointer;
+}
+
+label.persona-card .card-content-wrapper {
+	border-radius: 5px;
+	width: 100%;
+	height: 60px;
+	padding: 12px;
+	align-items: center;
+	display: flex;
+	gap: 10px;
+	transition: 300ms linear;
+}
+
+label.persona-card .check-icon {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	border: solid 2px #fff;
+	border-radius: 50%;
+	transition: 200ms linear;
+	position: relative;
+}
+
+label.persona-card .check-icon:before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-image: url("data:image/svg+xml,%3Csvg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.93552 4.58423C0.890286 4.53718 0.854262 4.48209 0.829309 4.42179C0.779553 4.28741 0.779553 4.13965 0.829309 4.00527C0.853759 3.94471 0.889842 3.88952 0.93552 3.84283L1.68941 3.12018C1.73378 3.06821 1.7893 3.02692 1.85185 2.99939C1.91206 2.97215 1.97736 2.95796 2.04345 2.95774C2.11507 2.95635 2.18613 2.97056 2.2517 2.99939C2.31652 3.02822 2.3752 3.06922 2.42456 3.12018L4.69872 5.39851L9.58026 0.516971C9.62828 0.466328 9.68554 0.42533 9.74895 0.396182C9.81468 0.367844 9.88563 0.353653 9.95721 0.354531C10.0244 0.354903 10.0907 0.369582 10.1517 0.397592C10.2128 0.425602 10.2672 0.466298 10.3112 0.516971L11.0651 1.25003C11.1108 1.29672 11.1469 1.35191 11.1713 1.41247C11.2211 1.54686 11.2211 1.69461 11.1713 1.82899C11.1464 1.88929 11.1104 1.94439 11.0651 1.99143L5.06525 7.96007C5.02054 8.0122 4.96514 8.0541 4.90281 8.08294C4.76944 8.13802 4.61967 8.13802 4.4863 8.08294C4.42397 8.0541 4.36857 8.0122 4.32386 7.96007L0.93552 4.58423Z' fill='white'/%3E%3C/svg%3E%0A");
+	background-repeat: no-repeat;
+	background-size: 12px;
+	background-position: center center;
+	transform: scale(1.6);
+	transition: 200ms linear;
+	opacity: 0;
+}
+
+label.persona-card input[type=radio] {
+	position: absolute;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+label.persona-card input[type=radio]:checked+.card-content-wrapper .check-icon {
+	background: black;
+	border-color: black;
+	transform: scale(1.2);
+}
+
+label.persona-card input[type=radio]:checked+.card-content-wrapper .check-icon:before {
+	transform: scale(1);
+	opacity: 1;
+}
+
+label.persona-card .card-content {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+label.persona-card .card-content img {
+	width: 48px;
+	border-radius: 50%;
+}
+
+label.persona-card .card-content .details {
+	display: flex;
+	flex-direction: column;
+	align-items: self-start;
+	flex: 1;
+}
+
+label.persona-card .card-content h4 {
+	font-size: 18px;
+	font-weight: 500;
+	text-align: center;
+	color: inherit;
+}
+
+label.persona-card .card-content p {
+	font-size: 14px;
+	line-height: 1.4;
+	text-align: center;
+	color: inherit;
+}
+
+label.persona-card.ava .card-content-wrapper {
+	background-color: var(--ava-background-color);
+}
+
+label.persona-card.ava input[type=radio]:checked+.card-content-wrapper {
+	box-shadow: 0 0 10px var(--ava-background-color);
+}
+
+label.persona-card.ava input[type=radio]:focus+.card-content-wrapper .check-icon {
+	box-shadow: 0 0 0 4px rgba(var(--black-rgb), 0.2);
+	border-color: var(--ava-background-color);
+}
+
+label.persona-card.ava .card-content img {
+	background-color: var(--ava-image-background);
+}
+
+label.persona-card.ava .card-content .details {
+	color: var(--ava-text-color);
+}
+
+label.persona-card.kai .card-content-wrapper {
+	background-color: var(--kai-background-color);
+}
+
+label.persona-card.kai input[type=radio]:checked+.card-content-wrapper {
+	box-shadow: 0 0 10px var(--kai-background-color);
+}
+
+label.persona-card.kai input[type=radio]:focus+.card-content-wrapper .check-icon {
+	box-shadow: 0 0 0 4px rgba(var(--black-rgb), 0.2);
+	border-color: var(--kai-background-color);
+}
+
+label.persona-card.kai .card-content img {
+	background-color: var(--kai-image-background);
+}
+
+label.persona-card.kai .card-content .details {
+	color: var(--kai-text-color);
+}
+
+label.persona-card.idara .card-content-wrapper {
+	background-color: var(--idara-background-color);
+}
+
+label.persona-card.idara input[type=radio]:checked+.card-content-wrapper {
+	box-shadow: 0 0 10px var(--idara-background-color);
+}
+
+label.persona-card.idara input[type=radio]:focus+.card-content-wrapper .check-icon {
+	box-shadow: 0 0 0 4px rgba(var(--black-rgb), 0.2);
+	border-color: var(--idara-background-color);
+}
+
+label.persona-card.idara .card-content img {
+	background-color: var(--idara-image-background);
+}
+
+label.persona-card.idara .card-content .details {
+	color: var(--idara-text-color);
+}
+
+label.persona-card.ethan .card-content-wrapper {
+	background-color: var(--ethan-background-color);
+}
+
+label.persona-card.ethan input[type=radio]:checked+.card-content-wrapper {
+	box-shadow: 0 0 10px var(--ethan-background-color);
+}
+
+label.persona-card.ethan input[type=radio]:focus+.card-content-wrapper .check-icon {
+	box-shadow: 0 0 0 4px rgba(var(--black-rgb), 0.2);
+	border-color: var(--ethan-background-color);
+}
+
+label.persona-card.ethan .card-content img {
+	background-color: var(--ethan-image-background);
+}
+
+label.persona-card.ethan .card-content .details {
+	color: var(--ethan-text-color);
+}

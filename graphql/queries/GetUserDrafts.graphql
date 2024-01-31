@@ -1,0 +1,26 @@
+query GetUserDrafts($host: String!, $nextCursor: String!) {
+  publication(host: $host) {
+    drafts(first: 6, after: $nextCursor) {
+      totalDocuments
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          coverImage {
+            url
+          }
+          id
+          title
+          updatedAt
+          tags {
+            name
+            slug
+          }
+        }
+        cursor
+      }
+    }
+  }
+}
