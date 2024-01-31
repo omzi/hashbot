@@ -51,7 +51,7 @@ const Navigation: FC<NavigationProps> = ({ children, hideOverflow }) => {
 			<aside
 				id='sidebar'
 				className={cn(
-					'fixed top-0 left-0 z-40 w-64 h-screen border-r shadow lg:shadow-none transition-transform duration-300 -translate-x-full lg:translate-x-0',
+					'fixed top-0 left-0 z-40 w-64 h-svh border-r shadow lg:shadow-none transition-transform duration-300 -translate-x-full lg:translate-x-0',
 					menuOpen && 'translate-x-0'
 				)}
 				aria-label='Sidebar'
@@ -151,21 +151,23 @@ const Navigation: FC<NavigationProps> = ({ children, hideOverflow }) => {
 						active={about.isOpen}
 					/>
 					
-					<div className='h-[1px] w-[calc(100%-4px)] mt-[100%] bg-primary/10' />
-					<div className='absolute bottom-0 flex items-center justify-between p-4 gap-x-4'>
-						<div className='flex flex-col gap-y-1'>
-							<Label className='text-xs uppercase'>Theme</Label>
-							<span className='text-xs text-muted-foreground'>
-								Customize how HashBot looks on your device
-							</span>
+					<div className='absolute bottom-0'>
+						<div className='h-[1px] w-[calc(100%-4px)] bg-primary/10' />
+						<div className='flex items-center justify-between p-4 gap-x-4'>
+							<div className='flex flex-col gap-y-1'>
+								<Label className='text-xs uppercase'>Theme</Label>
+								<span className='text-xs text-muted-foreground'>
+									Customize how HashBot looks on your device
+								</span>
+							</div>
+							<ModeToggle />
 						</div>
-						<ModeToggle />
 					</div>
 				</div>
 				<div className='absolute top-0 right-0 w-1 h-full bg-primary/10'/>
 			</aside>
 
-			<main className='h-[100svh] ml-0 lg:ml-64 flex flex-col'>
+			<main className='flex flex-col ml-0 h-svh lg:ml-64'>
 				<nav className={cn(
 					'flex items-center justify-between w-full shadow-sm dark:bg-black px-3 py-2.5'
 				)}>

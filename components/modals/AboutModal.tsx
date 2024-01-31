@@ -24,7 +24,7 @@ const AboutModal = () => {
 				</DialogHeader>
 				<p className='text-center text-muted-foreground'>HashBot is a customizable, AI-powered chatbot designed to elevate your blogging experience on Hashnode.</p>
 				<p className='text-center text-muted-foreground'>It also allows you import posts from external sources & efficiently manage and edit your published posts and drafts.</p>
-				<div className='flex flex-col mx-auto xs:flex-row gap-y-2 xs:gap-x-2'>
+				<div className='flex flex-col mx-auto text-center xs:flex-row gap-y-2 xs:gap-x-2'>
 					<Link href='https://twitter.com/intent/follow?screen_name=0xOmzi' target='_blank' rel='noopener noreferrer'>
 						<Button className='inline-flex items-center gap-x-2' size='sm' variant='outline' tabIndex={-1}>
 							<TwitterIcon className='w-4 h-4' />
