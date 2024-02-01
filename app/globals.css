@@ -126,6 +126,10 @@ body,
   @apply animate-text bg-gradient-to-r from-20% bg-clip-text text-transparent from-core via-emerald-500 to-core-secondary inline-table;
 } */
 
+.form-input {
+	@apply block h-12 w-full rounded-md border border-gray-300 py-1.5 px-2 text-gray-900 shadow-sm ring-0 outline-none placeholder:text-gray-400 placeholder:text-sm focus:border-core focus:ring-0 focus:outline-none sm:text-sm sm:leading-6
+}
+
 .form-button {
   @apply flex justify-center w-full px-3 py-2 text-sm font-medium text-white rounded-md shadow-sm bg-core hover:bg-blue-700 disabled:bg-blue-500 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600;
 }

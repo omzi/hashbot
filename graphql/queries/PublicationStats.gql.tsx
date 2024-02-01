@@ -8,12 +8,13 @@ export type PublicationStatsQueryVariables = Types.Exact<{
 }>;
 
 
-export type PublicationStatsQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', drafts: { __typename?: 'DraftConnection', totalDocuments: number }, posts: { __typename?: 'PublicationPostConnection', totalDocuments: number } } | null };
+export type PublicationStatsQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, drafts: { __typename?: 'DraftConnection', totalDocuments: number }, posts: { __typename?: 'PublicationPostConnection', totalDocuments: number } } | null };
 
 
 export const PublicationStatsDocument = gql`
     query PublicationStats($host: String!) {
   publication(host: $host) {
+    id
     drafts(first: 0) {
       totalDocuments
     }

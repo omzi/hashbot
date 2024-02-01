@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@graphql-typed-document-node/core": "^3.2.0",
+    "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",

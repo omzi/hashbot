@@ -56,6 +56,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
       body: JSON.stringify({
         query: `query PublicationStats {
           publication(host: "${data.me.username}.hashnode.dev") {
+            id
             drafts(first: 0) {
               totalDocuments
             }
@@ -74,10 +75,11 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
       return NextResponse.json({ message: 'Unauthenticated!' }, { status: 401 });
     }
 
+    const publicationId = statsData.publication?.id || '';
     const postsCount = statsData.publication?.posts.totalDocuments || 0;
     const draftsCount = statsData.publication?.drafts.totalDocuments || 0;
 
-    setUserData(token, data.me, postsCount, draftsCount);
+    setUserData(token, data.me, postsCount, draftsCount, publicationId);
     return NextResponse.json({ message: 'Authenticated', user: data.me }, { status: 200 });
   } catch (error) {
     console.log('Token Validation Error :>>', error);

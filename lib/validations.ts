@@ -11,3 +11,7 @@ export const SignInSchema = z.object({
 			message: 'Invalid Hashnode token format'
 		})
 });
+
+export const GenericImportSchema = z.object({
+  field: z.string().min(1, 'Please fill this field').default('')
+});

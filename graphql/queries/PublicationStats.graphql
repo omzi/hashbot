@@ -1,5 +1,6 @@
 query PublicationStats($host: String!) {
   publication(host: $host) {
+    id
     drafts(first: 0) {
       totalDocuments
     }

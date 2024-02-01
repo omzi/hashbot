@@ -17,6 +17,12 @@ export const generateDefaultAvatar = (seed: string) => {
   return `https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=${seed}`;
 };
 
+export const IMPORT_ENDPOINTS = {
+	'DEV.to': '/api/import/devto?username={username}',
+	'Medium': '/api/import/medium?username={username}',
+	'Notion': '/api/import/notion'
+}
+
 export const safeParseJSON = <T>(jsonString: string): T => {
   try {
     const parsedData = JSON.parse(jsonString);

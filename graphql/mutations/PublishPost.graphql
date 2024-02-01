@@ -1,0 +1,19 @@
+mutation PublishPost($input: PublishPostInput!) {
+  publishPost(input: $input) {
+    post {
+      url
+      tags {
+        name
+        slug
+      }
+      coverImage {
+        url
+      }
+      author {
+        name
+        profilePicture
+        username
+      }
+    }
+  }
+}
