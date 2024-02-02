@@ -86,10 +86,10 @@ const Navigation: FC<NavigationProps> = ({ children, hideOverflow }) => {
 						<TooltipProvider delayDuration={0}>
 							<Tooltip>
 								<TooltipTrigger asChild>
-									{!user ? <Button className='flex-1 w-full mr-3' size='icon' variant='outline'>
+									{!user ? <Button className='flex-1 w-full mr-3 h-9' size='icon' variant='outline'>
 										<ExternalLink className='w-4 h-4' />
 									</Button> : <Link href={`https://hashnode.com/@${user.username}`} target='_blank' className='flex-1 mr-3'>
-										<Button className='w-full' size='icon' variant='outline' tabIndex={-1}>
+										<Button className='w-full h-9' size='icon' variant='outline' tabIndex={-1}>
 											<ExternalLink className='w-4 h-4' />
 										</Button>
 									</Link>}

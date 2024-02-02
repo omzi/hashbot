@@ -17,6 +17,9 @@ query GetUserPosts($host: String!, $nextCursor: String!) {
           responseCount
           title
           url
+          author {
+            name
+          }
           views
           tags {
             name

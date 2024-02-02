@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-useless-escape */
+import { toast } from 'react-toastify';
 import { twMerge } from 'tailwind-merge';
+import { SocialMedia } from '#/common.types';
 import { type ClassValue, clsx } from 'clsx';
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -21,7 +23,51 @@ export const IMPORT_ENDPOINTS = {
 	'DEV.to': '/api/import/devto?username={username}',
 	'Medium': '/api/import/medium?username={username}',
 	'Notion': '/api/import/notion'
+};
+
+interface ShareData {
+  postLink: string;
+  postTitle: string;
+  postAuthor: string;
 }
+
+export const createShareLinks = (data: ShareData): Record<SocialMedia, string> => {
+  const { postLink, postTitle, postAuthor } = data;
+
+  return {
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postLink)}`,
+    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out "${postTitle}" by ${postAuthor} on Hashnode:\n\n${postLink}`)}`,
+    whatsapp: `https://api.whatsapp.com/send?text=${encodeURIComponent(`Check out "${postTitle}" by ${postAuthor} on Hashnode:\n\n${postLink}`)}`,
+    telegram: `https://t.me/share/url?url=${encodeURIComponent(postLink)}&text=${encodeURIComponent(`Check out "${postTitle}" by ${postAuthor} on Hashnode:\n\n${postLink}`)}`
+  };
+}
+
+export const copyToClipboard = async (text: string, successMessage: string): Promise<boolean> => {
+	try {
+		await navigator.clipboard.writeText(text);
+		toast.success(successMessage);
+		return true;
+	} catch (error) {
+		try {
+			const textarea = document.createElement('textarea');
+			textarea.value = text;
+			textarea.setAttribute('readonly', '');
+			textarea.style.position = 'absolute';
+			textarea.style.left = '-9999px';
+			document.body.appendChild(textarea);
+			
+			textarea.select();
+			document.execCommand('copy');
+			document.body.removeChild(textarea);
+			toast.success(successMessage);
+
+			return true;
+		} catch (fallbackError) {
+			console.error('Copying to clipboard failed :>>', fallbackError);
+			return false;
+		}
+	}
+};
 
 export const safeParseJSON = <T>(jsonString: string): T => {
   try {

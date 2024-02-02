@@ -40,7 +40,7 @@ const ImportSuccessfulModal = ({
 				<div className='flex items-center gap-6 p-4 mx-auto'>
 					<Link onClick={onOpenChange} href={profileLink} target='_blank' rel='noopener noreferrer'>
 						<Button>
-							View Hashnode profile
+							View Hashnode blog
 							<ExternalLinkIcon className='w-4 h-4 ml-2' />
 						</Button>
 					</Link>

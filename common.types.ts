@@ -81,6 +81,8 @@ export type MediumPost = {
   categories: string[];
 };
 
+export type SocialMedia = 'facebook' | 'twitter' | 'whatsapp' | 'telegram';
+
 export type Persona = {
   name: string;
   description: string;

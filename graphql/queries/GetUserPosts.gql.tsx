@@ -9,7 +9,7 @@ export type GetUserPostsQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetUserPostsQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, pageInfo: { __typename?: 'PageInfo', hasNextPage?: boolean | null, endCursor?: string | null }, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', bookmarked: boolean, id: string, reactionCount: number, responseCount: number, title: string, url: string, views: number, publishedAt: any, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, tags?: Array<{ __typename?: 'Tag', name: string, slug: string }> | null } }> } } | null };
+export type GetUserPostsQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', posts: { __typename?: 'PublicationPostConnection', totalDocuments: number, pageInfo: { __typename?: 'PageInfo', hasNextPage?: boolean | null, endCursor?: string | null }, edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', bookmarked: boolean, id: string, reactionCount: number, responseCount: number, title: string, url: string, views: number, publishedAt: any, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, author: { __typename?: 'User', name: string }, tags?: Array<{ __typename?: 'Tag', name: string, slug: string }> | null } }> } } | null };
 
 
 export const GetUserPostsDocument = gql`
@@ -32,6 +32,9 @@ export const GetUserPostsDocument = gql`
           responseCount
           title
           url
+          author {
+            name
+          }
           views
           tags {
             name

@@ -14,7 +14,7 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 	AlertDialogTrigger
-} from './ui/alert-dialog';
+} from '#/components/ui/alert-dialog';
 
 import {
 	DropdownMenu,
@@ -68,7 +68,7 @@ const UserButton = ({
 						<div className='flex flex-col gap-2 space-y-1'>
 							<p className='text-base font-medium leading-none'>{fullName}</p>
 							<p className='text-xs leading-none text-muted-foreground'>
-								{username}
+								@{username}
 							</p>
 						</div>
 					</DropdownMenuLabel>
@@ -77,6 +77,14 @@ const UserButton = ({
 						<Link href={`https://hashnode.com/@${username}`} target='_blank'>
 							<DropdownMenuItem>
 								Hashnode Profile
+								<DropdownMenuShortcut>
+									<ExternalLinkIcon size={16} />
+								</DropdownMenuShortcut>
+							</DropdownMenuItem>
+						</Link>
+						<Link href={`https://${username}.hashnode.com`} target='_blank'>
+							<DropdownMenuItem>
+								Hashnode Blog
 								<DropdownMenuShortcut>
 									<ExternalLinkIcon size={16} />
 								</DropdownMenuShortcut>
