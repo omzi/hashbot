@@ -69,7 +69,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
               publicationId,
               title: article.title,
               subtitle: '',
-              slug: new URL(article.link).pathname.replace('/', ''),
+              slug: new URL(article.link).pathname.replaceAll('/', '').replaceAll('@', ''),
               contentMarkdown: markdownContent,
               coverImageOptions: { coverImageURL: article.thumbnail || coverImage },
               disableComments: false,

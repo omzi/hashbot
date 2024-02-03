@@ -8,11 +8,12 @@ import { Post } from '#/graphql/types';
 import { Prettify } from '#/common.types';
 import PostCard from '#/components/PostCard';
 import { Button } from '#/components/ui/button';
-import { ArrowDown, PlusIcon } from 'lucide-react';
+import { ArrowDown, PenIcon, PlusIcon } from 'lucide-react';
 import { useLoadPosts } from '#/hooks/useLoadPosts';
 import Navigation from '#/components/shared/Navigation';
 import ShareModal from '#/components/modals/ShareModal';
 import { useUser } from '#/components/contexts/UserContext';
+import Image from 'next/image';
 
 const Posts = () => {
 	const { user, postsCount } = useUser();
@@ -47,6 +48,36 @@ const Posts = () => {
 						</Button>
 					</Link>
 				</div>
+
+				{postsCount === 0 && (
+					<div className='flex flex-col items-center justify-center mt-6 space-y-4 text-center'>
+						<div className='hidden dark:block'>
+							<Image
+								src='/images/empty-state-dark.svg'
+								height='300'
+								width='300'
+								alt='No post found ;)'
+								fetchPriority='high'
+							/>
+						</div>
+						<div className='block dark:hidden'>
+							<Image
+								src='/images/empty-state-light.svg'
+								height='300'
+								width='300'
+								alt='No post found ;)'
+								fetchPriority='high'
+							/>
+						</div>
+						<h2 className='mx-4 text-xl text-muted-foreground'>Your blog is empty! Write your first article.</h2>
+						<Link href='/'>
+							<Button className='transition-colors duration-300 bg-core hover:bg-blue-600' size='sm'>
+								<PenIcon className='w-4 h-4 mr-2' />
+								Write New Article
+							</Button>
+						</Link>
+					</div>
+				)}
 
 				<div className='grid grid-cols-1 gap-6 py-4 mt-4 lg:grid-cols-2 2xl:grid-cols-3'>
 					{items.map((post, idx) => {

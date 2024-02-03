@@ -18,22 +18,33 @@ const Error: FC<ErrorProps> = ({ error, reset }) => {
 	}, [error]);
 
 	return (
-		<div className='h-full flex flex-col items-center justify-center space-y-4'>
-			<Image
-				src='/images/error.svg'
-				height='400'
-				width='400'
-				alt='Error'
-				priority={true}
-			/>
+		<div className='flex flex-col items-center justify-center h-full space-y-4'>
+			<div className='hidden dark:block'>
+				<Image
+					src='/images/error-dark.svg'
+					height='400'
+					width='400'
+					alt='Error'
+					fetchPriority='high'
+				/>
+			</div>
+			<div className='block dark:hidden'>
+				<Image
+					src='/images/error-light.svg'
+					height='400'
+					width='400'
+					alt='Error'
+					fetchPriority='high'
+				/>
+			</div>
 			<h2 className='text-xl font-medium'>Something went wrong!</h2>
 			<Button variant='outline' size='sm' onClick={() => reset()}>
-				<RotateCcw className='mr-2 w-4 h-4' />
+				<RotateCcw className='w-4 h-4 mr-2' />
 				Try again?
 			</Button>
 			<Link href='/'>
-				<Button className='bg-core hover:bg-blue-600 transition-colors duration-300' size='sm'>
-					<Home className='mr-2 w-4 h-4' />
+				<Button className='transition-colors duration-300 bg-core hover:bg-blue-600' size='sm'>
+					<Home className='w-4 h-4 mr-2' />
 					Go home
 				</Button>
 			</Link>
