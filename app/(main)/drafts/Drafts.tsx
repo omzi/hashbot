@@ -58,7 +58,7 @@ const Drafts = () => {
 							/>
 						</div>
 						<h2 className='mx-4 text-xl text-muted-foreground'>No drafts, yet :). Get your creative juices flowing by clicking the button below.</h2>
-						<Link href='/'>
+						<Link href='https://hashnode.com/draft' target='_blank'>
 							<Button className='transition-colors duration-300 bg-core hover:bg-blue-600' size='sm'>
 								<PenIcon className='w-4 h-4 mr-2' />
 								New Draft

@@ -2,18 +2,18 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Post } from '#/graphql/types';
 import { Prettify } from '#/common.types';
 import PostCard from '#/components/PostCard';
 import { Button } from '#/components/ui/button';
-import { ArrowDown, PenIcon, PlusIcon } from 'lucide-react';
 import { useLoadPosts } from '#/hooks/useLoadPosts';
 import Navigation from '#/components/shared/Navigation';
 import ShareModal from '#/components/modals/ShareModal';
 import { useUser } from '#/components/contexts/UserContext';
-import Image from 'next/image';
+import { ArrowDown, PenIcon, PlusIcon } from 'lucide-react';
 
 const Posts = () => {
 	const { user, postsCount } = useUser();
@@ -70,7 +70,7 @@ const Posts = () => {
 							/>
 						</div>
 						<h2 className='mx-4 text-xl text-muted-foreground'>Your blog is empty! Write your first article.</h2>
-						<Link href='/'>
+						<Link href='https://hashnode.com/draft' target='_blank'>
 							<Button className='transition-colors duration-300 bg-core hover:bg-blue-600' size='sm'>
 								<PenIcon className='w-4 h-4 mr-2' />
 								Write New Article
