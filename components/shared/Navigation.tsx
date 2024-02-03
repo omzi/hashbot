@@ -110,12 +110,12 @@ const Navigation: FC<NavigationProps> = ({ children, hideOverflow }) => {
 						onClick={closeMenu}
 						active={pathname === '/chat'}
 					/>
-					<Item
+					{/* <Item
 						onClick={search.onOpen}
 						label='Search'
 						icon={SearchIcon}
 						isSearch
-					/>
+					/> */}
 					<Item
 						isLink
 						path='/drafts'

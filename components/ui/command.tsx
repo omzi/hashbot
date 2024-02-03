@@ -27,8 +27,8 @@ interface CommandDialogProps extends DialogProps {}
 const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
 	return (
 		<Dialog {...props}>
-			<DialogContent className='overflow-hidden p-0 shadow-lg'>
-				<Command className='[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5'>
+			<DialogContent showCloseButton={false} className='p-0 shadow-lg rounded-lg w-[calc(100%-20px)] sm:w-[24rem] md:w-[30rem] overflow-hidden'>
+				<Command loop className='[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5'>
 					{children}
 				</Command>
 			</DialogContent>
@@ -40,12 +40,12 @@ const CommandInput = forwardRef<
 	ElementRef<typeof CommandPrimitive.Input>,
 	ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
-	<div className='flex items-center border-b px-3' cmdk-input-wrapper=''>
-		<Search className='mr-2 h-4 w-4 shrink-0 opacity-50' />
+	<div className='flex items-center px-3 border-b' cmdk-input-wrapper=''>
+		<Search className='w-4 h-4 mr-2 opacity-50 shrink-0' />
 		<CommandPrimitive.Input
 			ref={ref}
 			className={cn(
-				'flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
+				'flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 border-none focus:ring-0',
 				className
 			)}
 			{...props}
@@ -74,7 +74,7 @@ const CommandEmpty = forwardRef<
 >((props, ref) => (
 	<CommandPrimitive.Empty
 		ref={ref}
-		className='py-6 text-center text-sm'
+		className='py-6 text-sm text-center'
 		{...props}
 	/>
 ));
@@ -116,7 +116,7 @@ const CommandItem = forwardRef<
 	<CommandPrimitive.Item
 		ref={ref}
 		className={cn(
-			'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+			'relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
 			className
 		)}
 		{...props}
@@ -128,15 +128,14 @@ CommandItem.displayName = CommandPrimitive.Item.displayName;
 const CommandShortcut = ({
 	className,
 	...props
-}: HTMLAttributes<HTMLSpanElement>) => {
+}: HTMLAttributes<HTMLElement>) => {
 	return (
-		<span
-			className={cn(
-				'ml-auto text-xs tracking-widest text-muted-foreground',
-				className
-			)}
-			{...props}
-		/>
+		<kbd className={cn(
+			'ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100',
+			className
+		)}>
+			<span className='text-xs' {...props} />
+		</kbd>
 	);
 };
 CommandShortcut.displayName = 'CommandShortcut';

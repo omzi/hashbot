@@ -13,19 +13,15 @@ import { useUser } from '#/components/contexts/UserContext';
 import { Avatar, AvatarImage } from '#/components/ui/avatar';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { ArrowUpIcon, SendIcon, ShuffleIcon } from 'lucide-react';
-import PersonaSelectionModal from '#/components/modals/PersonaSelectionModal';
 import { cn, generateDefaultAvatar, initialMessage, personas, prompts, shuffleArray } from '#/lib/utils';
 
 const Chat = () => {
 	const { user } = useUser();
-	const { persona, setPersona } = usePersona();
-	if (!persona) return;
-	
 	const [loading, setLoading] = useState(false);
-	const [showPersonaModal, setShowPersonaModal] = useState(false);
 	const isMobile = useMediaQuery('(max-width: 768px)');
 	const messageEndRef = useRef<HTMLDivElement>(null);
 	const submitButtonRef = useRef<HTMLButtonElement>(null);
+	const { persona, setPersona, onOpen: openPersonaModal } = usePersona();
 	const [selectedPrompts, setSelectedPrompts] = useState<typeof prompts>();
 	const { messages, handleSubmit, input, setInput, handleInputChange } = useChat({
 		api: '/api/chat',
@@ -82,19 +78,9 @@ const Chat = () => {
 		textarea.style.height = `${textarea.scrollHeight}px`; // Set height to scrollHeight
 	}
 
-	const handleClose = () => {
-		setShowPersonaModal(false);
-	};
-
 	return (
 		<Navigation hideOverflow>
 			<div className='flex flex-col h-full px-2 py-3 sm:px-6 sm:pb-5'>
-				<PersonaSelectionModal
-					isOpen={showPersonaModal}
-					onOpenChange={handleClose}
-					personas={personas}
-					submitHandler={() => {}}
-				/>
 				{messages.length === 1 && (<div className='flex flex-col items-center justify-between flex-1 mx-0 sm:mx-12'>
 					<div className='flex flex-col justify-center max-w-lg text-center'>
 						<div className='flex justify-center w-32 h-32 mx-auto overflow-hidden rounded-full' style={{ backgroundColor: `var(--${persona}-image-background)` }}>
@@ -181,7 +167,7 @@ const Chat = () => {
 				</form>
 
 				<div className='mx-auto mt-2 -mb-1 lg:-mb-3'>
-					<Button className='h-auto px-2 py-1 text-xs' variant='outline' size='sm' onClick={() => setShowPersonaModal(true)}>
+					<Button className='h-auto px-2 py-1 text-xs' variant='outline' size='sm' onClick={openPersonaModal}>
 						<ShuffleIcon className='w-3 h-3 mr-2 transform rotate-180' />
 						Switch AI persona
 					</Button>

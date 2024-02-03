@@ -17,6 +17,9 @@ import { PersonaType } from '#/lib/utils';
 type PersonaStore = {
 	persona: PersonaType;
 	setPersona: (persona: PersonaType) => void;
+	isOpen: boolean;
+	onOpen: () => void;
+	onClose: () => void;
 };
 
 export const usePersona = create<PersonaStore>((set) => {
@@ -26,11 +29,10 @@ export const usePersona = create<PersonaStore>((set) => {
 		persona: storedPersona && storedPersona !== 'undefined' ? (storedPersona as PersonaType) : 'ava',
 		setPersona: (newPersona) => {
 			set({ persona: newPersona });
-			if (newPersona) {
-				localStorage.setItem('persona', `${newPersona}`);
-			} else {
-				localStorage.removeItem('persona');
-			}
-		}
+			localStorage.setItem('persona', `${newPersona}`);
+		},
+		isOpen: false,
+		onOpen: () => set({ isOpen: true }),
+		onClose: () => set({ isOpen: false })
 	};
 });

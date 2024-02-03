@@ -1,13 +1,14 @@
 import { useCookies } from 'react-cookie';
 import { usePathname } from 'next/navigation';
-import { createContext, FC, ReactNode, useState, useEffect, useContext } from 'react';
 import { GetCurrentUserQuery } from '#/graphql/queries/GetCurrentUser.gql';
+import { createContext, FC, ReactNode, useState, useEffect, useContext } from 'react';
 
 interface UserContextProps {
 	token: string | null;
 	user: GetCurrentUserQuery['me'] | null;
 	postsCount: number;
 	draftsCount: number;
+	publicationId: string;
 	isLoading: boolean;
 	setToken: (token: string) => void;
 	setUser: (user: GetCurrentUserQuery['me']) => void;
@@ -19,6 +20,7 @@ const UserContext = createContext<UserContextProps>({
 	user: null,
 	postsCount: 0,
 	draftsCount: 0,
+	publicationId: '',
 	isLoading: true,
 	setToken: () => { },
 	setUser: () => { },
@@ -34,9 +36,10 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
 	const [token, setToken] = useState<string | null>(null);
 	const [postsCount, setPostsCount] = useState<number>(0);
 	const [draftsCount, setDraftsCount] = useState<number>(0);
+	const [publicationId, setPublicationId] = useState<string>('');
 	const [user, setUser] = useState<GetCurrentUserQuery['me'] | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
-	const [cookies, setCookie] = useCookies(['token', 'user', 'postsCount', 'draftsCount']);
+	const [cookies, setCookie] = useCookies(['token', 'user', 'postsCount', 'draftsCount', 'publicationId']);
 
 	useEffect(() => {
 		// console.log('Cookies :>>', cookies);
@@ -44,11 +47,13 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
 		const storedUser = cookies.user || null;
 		const storedPostsCount = cookies.postsCount || 0;
 		const storedDraftsCount = cookies.draftsCount || 0;
+		const storedPublicationId = cookies.publicationId || '';
 
 		setToken(storedToken);
 		setUser(storedUser);
 		setPostsCount(storedPostsCount);
 		setDraftsCount(storedDraftsCount);
+		setPublicationId(storedPublicationId);
 		setIsLoading(false);
 	}, [cookies]);
 
@@ -63,6 +68,7 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
 	};
 
 	const logOut = () => {
+		setIsLoading(true);
 		setToken(null);
 		setUser(null);
 		setPostsCount(0);
@@ -71,6 +77,7 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
 		setCookie('user', '', { path: '/', expires: new Date(0) });
 		setCookie('postsCount', '', { path: '/', expires: new Date(0) });
 		setCookie('draftsCount', '', { path: '/', expires: new Date(0) });
+		setCookie('publicationId', '', { path: '/', expires: new Date(0) });
 
 		// Redirect to the sign-in page with the current pathname as next
 		window.location.href = `/sign-in?next=${encodeURIComponent(pathname)}`;
@@ -81,6 +88,7 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
 		user,
 		postsCount,
 		draftsCount,
+		publicationId,
 		isLoading,
 		setToken: updateToken,
 		setUser: updateUser,

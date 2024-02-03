@@ -1,36 +1,30 @@
 'use client';
 
-import { Personas } from '#/common.types';
-import { PersonaType } from '#/lib/utils';
+import { useRouter } from 'next/navigation';
 import { Button } from '#/components/ui/button';
 import { usePersona } from '#/hooks/usePersona';
 import PersonaCard from '#/components/PersonaCard';
+import { PersonaType, personas } from '#/lib/utils';
 import { ArrowRightIcon, SparklesIcon } from 'lucide-react';
 import { Dialog, DialogContent } from '#/components/ui/dialog';
 
-interface PersonaSelectionModalProps {
-	isOpen: boolean;
-	onOpenChange: () => void;
-	personas: Personas;
-	submitHandler: () => void;
-}
-
-const PersonaSelectionModal = ({
-	isOpen,
-	onOpenChange,
-	personas,
-	submitHandler
-}: PersonaSelectionModalProps) => {
+const PersonaSelectionModal = () => {
+	const router = useRouter();
+	const isOpen = usePersona(store => store.isOpen);
+	const onClose = usePersona(store => store.onClose);
 	const { persona: currentPersona, setPersona } = usePersona();
+
 	const handlePersonaChange = (personaId: PersonaType) => {
 		setPersona(personaId);
+	}
 
-		// TODO: Make a request to persist it in database...
-		// onOpenChange();
+	const handleContinueClick = () => {
+		onClose();
+		router.push(`/chat/${currentPersona}`);
 	}
 	
 	return (
-		<Dialog open={isOpen} onOpenChange={onOpenChange}>
+		<Dialog open={isOpen} onOpenChange={onClose}>
 			<DialogContent className='rounded-lg w-[calc(100%-20px)] xs:w-[24rem] sm:w-[36rem] md:w-[44rem] space-y-0 flex flex-col gap-0' showCloseButton={false}>
 				<div className='flex flex-col items-center gap-3 mx-auto my-3 text-center'>
 					<SparklesIcon size={32} className='text-black dark:text-white' />
@@ -51,7 +45,7 @@ const PersonaSelectionModal = ({
 					))}
 				</div>
 				<div className='pt-6 mx-auto'>
-					<Button onClick={() => onOpenChange()}>
+					<Button onClick={handleContinueClick}>
 						Continue
 						<ArrowRightIcon className='w-4 h-4 ml-2' />
 					</Button>

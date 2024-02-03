@@ -40,7 +40,7 @@ const DraftPostCard = ({
 					</div>
 				</div>
 			</div>
-			<Link href={`https://hashnode.com/drafts/${id}`} tabIndex={-1} target='_blank' className='absolute h-[10.5rem] inset-0 flex invisible transition-all duration-300 opacity-0 bg-black/50 group-hover:visible group-hover:opacity-100 group-focus:visible group-focus:opacity-100'>
+			<Link href={`https://hashnode.com/draft/${id}`} tabIndex={-1} target='_blank' className='absolute h-[10.5rem] inset-0 flex invisible transition-all duration-300 opacity-0 bg-black/50 group-hover:visible group-hover:opacity-100 group-focus:visible group-focus:opacity-100'>
 				<div className='inline-block p-4 m-auto bg-white rounded-full'>
 					<PenLineIcon className='w-6 h-6 text-black' />
 				</div>

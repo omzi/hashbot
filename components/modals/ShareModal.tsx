@@ -65,9 +65,9 @@ const ShareModal = ({
 					</div>
 				</div>
 
-				<p className='text-center text-muted-foreground'>Or, click the link below to copy it and share 🥳</p>
+				<p className='text-center text-muted-foreground'>Or, copy & share the link below 🥳</p>
 				
-				<div onClick={handleLinkClick} className='flex items-center justify-between py-3 border border-gray-400 border-dashed rounded-lg cursor-pointer gap-x-4'>
+				<div onClick={handleLinkClick} className='flex items-center justify-between py-3 bg-gray-300 border border-gray-400 rounded-lg cursor-pointer dark:bg-[#212121] gap-x-4'>
 					<div className='flex-1 !w-0 !h-10 ml-2 truncate border cursor-pointer dark:text-white form-input bg-light-1 dark:bg-dark-3 focus:border-none'>{post.url}</div>
 					<CopyIcon className='mr-4 stroke-1' />
 				</div>

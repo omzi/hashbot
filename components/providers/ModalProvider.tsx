@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import AboutModal from '#/components/modals/AboutModal';
+import LogOutModal from '#/components/modals/LogOutModal';
+import CommandModal from '#/components/modals/CommandModal';
+import PersonaSelectionModal from '#/components/modals/PersonaSelectionModal';
 
 export const ModalProvider = () => {
 	const [isMounted, setIsMounted] = useState(false);
@@ -17,6 +20,9 @@ export const ModalProvider = () => {
 	return (
 		<>
 			<AboutModal />
+			<LogOutModal />
+			<CommandModal />
+			<PersonaSelectionModal />
 		</>
 	);
 };
